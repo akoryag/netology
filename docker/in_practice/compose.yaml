@@ -1,0 +1,33 @@
+version: '3.8'
+include:
+  - proxy.yaml
+  
+services:
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile.python
+    container_name: flask_web_python
+    restart: on-failure
+    networks:
+      backend:
+        ipv4_address: 172.20.0.5
+    depends_on:
+      - reverse-proxy
+      - ingress-proxy
+      - db
+    env_file:
+      - .env
+  
+  db:
+    image: mysql:8
+    container_name: flask_db_mysql
+    restart: on-failure
+    networks:
+      backend:
+        ipv4_address: 172.20.0.10
+    depends_on:    
+      - reverse-proxy
+      - ingress-proxy
+    env_file:
+      - .env
