@@ -2,8 +2,8 @@
 clickhouse:
   hosts:
     clickhouse-01:
-      ansible_host: 
+      ansible_host: centos7
 vector:
   hosts:
     vector-01:
-      ansible_host: 
+      ansible_host: ubuntu
